@@ -100,9 +100,9 @@ except AttributeError:
 
     print('--NÃO ENCONTRADO--')
 
-    nome_estante_virtual = 'não encontrado'
+    nome_estante_virtual = 'nao encontrado'
 
-    preço_estante_virtual = 'não encontrado'
+    preço_estante_virtual = 'nao encontrado'
 
 
 '''LIVRARIA CULTURA'''
@@ -145,9 +145,9 @@ except AttributeError:
 
     print('--NÃO ENCONTRADO--')
 
-    nome_livraria_cultura = 'não encontrado'
+    nome_livraria_cultura = 'nao encontrado'
 
-    preço_livraria_cultura = 'não encontrado'
+    preço_livraria_cultura = 'nao encontrado'
 
 '''LIVRARIA LEITURA'''
 
@@ -185,9 +185,9 @@ except AttributeError:
 
     print('--NÃO ENCONTRADO--')
 
-    nome_livraria_leitura = 'não encontrado'
+    nome_livraria_leitura = 'nao encontrado'
 
-    preço_livraria_leitura = 'não encontrado'
+    preço_livraria_leitura = 'nao encontrado'
 
 '''lIVRARIA DA VILA'''
 
@@ -230,9 +230,9 @@ except AttributeError:
 
     print('__________________________________________________________________________')
 
-    nome_livraria_da_vila = 'não encontrado'
+    nome_livraria_da_vila = 'nao encontrado'
 
-    preço_livraria_da_vila = 'não encontrado'
+    preço_livraria_da_vila = 'nao encontrado'
 
 '''PARTE CSV'''
 
