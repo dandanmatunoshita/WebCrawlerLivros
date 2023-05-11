@@ -2,6 +2,29 @@ import csv
 from requests import *
 from bs4 import BeautifulSoup
 
+def testar(pesquisa, nome, preço, carrinho):
+    nome_do_livro = trocar_caracter(nome_do_livro)
+    nome = trocar_caracter(nome)
+    if nome_do_livro.lower() in nome.lower():
+        print('__________________________________________________________________________')
+
+        print(f'\n___{pesquisa}___ \n')
+
+        print(f'--nome-- \n{nome.strip()} \n \n--preço-- \n{preço} \n')
+
+        print('url:', 'www.estantevirtual.com.br' + carrinho.get('href'))
+
+    else:
+        print('__________________________________________________________________________')
+
+        print(f'\n___{pesquisa}___ \n')
+
+        print('--NÃO ENCONTRADO--')
+
+        nome = 'nao encontrado'
+
+        nome = 'nao encontrado'
+
 def trocar_caracter(nome):
 
     acentos = {'á': 'a', 'à': 'a', 'â': 'a', 'ã': 'a', 'ä': 'a', 'é': 'e', 'è': 'e', 'ê': 'e', 'ë': 'e', 'í': 'i', 'ì': 'i', 'î': 'i', 'ï': 'i', 'ó': 'o', 'ò': 'o', 'ô': 'o', 'õ': 'o', 'ö': 'o', 'ú': 'u', 'ù': 'u', 'û': 'u', 'ü': 'u', 'ç': 'c', ',': '', '"': '', "'": ""}
@@ -17,14 +40,6 @@ def trocar_caracter(nome):
     nome = texto_sem_acentos
 
     return nome
-
-def verificação(nome):
-    if nome_do_livro not in trocar_caracter(nome).lower():
-        return AttributeError
-
-def trocar_numero(numero):
-    numero = numero.replace(',', '.')
-    return numero
 
 #input do nome do livro
 nome_do_livro = input('Nome do livro: ')
@@ -71,6 +86,8 @@ sopa_estante_virtual = BeautifulSoup(pagina_estante_virtual.content, 'html.parse
 
 try:
 
+    pesquisa_estante_virtual = 'ESTANTE VIRTUAL'
+
     nome_estante_virtual = sopa_estante_virtual.find('h2', {'itemprop' : 'name'}).get_text()
 
     preço_estante_virtual = sopa_estante_virtual.find('span', {'class': 'preco'}).get_text()
@@ -79,17 +96,7 @@ try:
 
     carrinho_estante_virtual = link_estante_virtual.find('a')
 
-    #PRINTAR
-
-    print('__________________________________________________________________________')
-
-
-    print(f'\n___ESTANTE VIRUTAL___ \n')
-
-    print(f'--nome-- \n{nome_estante_virtual.strip()} \n \n--preço-- \n{preço_estante_virtual} \n')
-
-    print('url:', 'www.estantevirtual.com.br' + carrinho_estante_virtual.get('href'))
-
+    testar(pesquisa_estante_virtual, nome_estante_virtual, preço_estante_virtual, carrinho_estante_virtual)
 
 except AttributeError:
 
@@ -115,9 +122,9 @@ sopa_livraria_cultura = BeautifulSoup(pagina_livraria_cultura.content, 'html.par
 
 try:
 
-    nome_livraria_cultura = sopa_livraria_cultura.find('h2', {'class' : 'prateleiraProduto__informacao__nome'}).get_text()
+    pesquisa_livraria_cultura = 'LIVRARIA CULTURA'
 
-    verificação(nome_livraria_cultura)
+    nome_livraria_cultura = sopa_livraria_cultura.find('h2', {'class' : 'prateleiraProduto__informacao__nome'}).get_
 
     preço_livraria_cultura = sopa_livraria_cultura.find('span', {'class' : 'prateleiraProduto__informacao__preco--por'}).get_text()
 
@@ -125,17 +132,7 @@ try:
 
     carrinho_livraria_cultura = link_livraria_cultura.find('a')
 
-    #PRINTAR
-    
-    print('__________________________________________________________________________')
-
-    
-    print('\n___LIVRARIA CULTURA ___ \n')
-
-    print(f'---Nome--- \n{nome_livraria_cultura.strip()} \n \n---Preço--- \n{preço_livraria_cultura} \n')
-    
-    print('url:', carrinho_livraria_cultura.get('href'))
-
+    testar(pesquisa_livraria_cultura, nome_livraria_cultura, preço_livraria_cultura, carrinho_livraria_cultura)
 
 except AttributeError:
 
@@ -157,9 +154,9 @@ sopa_livraria_leitura = BeautifulSoup(pagina_livraria_leitura.content, 'html.par
 
 try:
 
-    nome_livraria_leitura = sopa_livraria_leitura.find('h4').get_text()
+    pesquisa_livraria_leitura = 'LIVRARIA LEITURA'
 
-    print(verificação(nome_livraria_leitura))
+    nome_livraria_leitura = sopa_livraria_leitura.find('h4').get_text()
 
     preço_livraria_leitura = sopa_livraria_leitura.find('span', {'class' : 'price-new'}).get_text()
 
@@ -167,15 +164,7 @@ try:
 
     carrinho_livraria_leitura = link_livraria_leitura.find('a')
 
-    #SEPARADOR
-    print('__________________________________________________________________________')
-
-    #OUTPUT LIVRARIA LEITURA
-    print('\n___LIVRARIA LEITURA___ \n')
-
-    print(f'---Nome--- \n{nome_livraria_leitura} \n \n---Preço--- \n{preço_livraria_leitura} \n')
-
-    print('url:', carrinho_livraria_leitura.get('href'))
+    testar(pesquisa_livraria_leitura, nome_livraria_leitura, preço_livraria_leitura, carrinho_livraria_leitura)
 
 except AttributeError:
 
@@ -199,9 +188,9 @@ sopa_livraria_da_vila = BeautifulSoup(pagina_livraria_da_vila.content, 'html.par
 
 try:
 
-    nome_livraria_da_vila = sopa_livraria_da_vila.find('div', {'class':'prod-nome'}).get_text()
+    pesquisa_livraria_da_vila = 'LIVRARIA DA VILA'
 
-    verificação(nome_livraria_da_vila)
+    nome_livraria_da_vila = sopa_livraria_da_vila.find('div', {'class':'prod-nome'}).get_text()
 
     preço_livraria_da_vila = sopa_livraria_da_vila.find('div', {'class':'price'}).get_text()
 
@@ -209,16 +198,7 @@ try:
 
     carrinho_livraria_da_vila = link_livraria_da_vila.find('a')
 
-    print('__________________________________________________________________________')
-
-    #OUTPUT LIVRARIA DA VILA
-    print('\n___LIVRARIA DA VILA___ \n')
-
-    print(f'---Nome--- \n{nome_livraria_da_vila.strip()} \n \n---Preço--- \n{preço_livraria_da_vila.strip()} \n')
-
-    print('url:', carrinho_livraria_da_vila.get('href'))
-
-    print('__________________________________________________________________________')
+    testar(pesquisa_livraria_da_vila, nome_livraria_da_vila, preço_livraria_da_vila, carrinho_livraria_da_vila)
 
 except AttributeError:
 
@@ -237,11 +217,11 @@ except AttributeError:
 '''PARTE CSV'''
 
 #AJUSTE PREÇO
-
-preço_estante_virtual = trocar_numero(preço_estante_virtual).strip()
-preço_livraria_cultura = trocar_numero(preço_livraria_cultura).strip()
-preço_livraria_leitura = trocar_numero(preço_livraria_leitura).strip()
-preço_livraria_da_vila = trocar_numero(preço_livraria_da_vila).strip()
+'''
+preço_estante_virtual = trocar_caracter(preço_estante_virtual).strip()
+preço_livraria_cultura = trocar_caracter(preço_livraria_cultura).strip()
+preço_livraria_leitura = trocar_caracter(preço_livraria_leitura).strip()
+preço_livraria_da_vila = trocar_caracter(preço_livraria_da_vila).strip()
 
 #AJUSTE NOME
 
@@ -252,4 +232,4 @@ nome_livraria_da_vila = trocar_caracter(nome_livraria_da_vila).strip().lower()
 
 with open('banco_csv.csv', 'a', newline='') as arquivo:
     escrever = csv.writer(arquivo)
-    escrever.writerow([nome_estante_virtual, preço_estante_virtual, nome_livraria_cultura, preço_livraria_cultura, nome_livraria_leitura, preço_livraria_leitura, nome_livraria_da_vila, preço_livraria_da_vila])
+    escrever.writerow([nome_estante_virtual, preço_estante_virtual, nome_livraria_cultura, preço_livraria_cultura, nome_livraria_leitura, preço_livraria_leitura, nome_livraria_da_vila, preço_livraria_da_vila])'''
