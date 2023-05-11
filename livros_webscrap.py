@@ -96,7 +96,13 @@ except AttributeError:
     
     print('__________________________________________________________________________')
 
-    print(f'Não se encontrou {nome_do_livro} na estante virtual.')
+    print(f'\n___ESTANTE VIRTUAL ___ \n')
+
+    print('--NÃO ENCONTRADO--')
+
+    nome_estante_virtual = 'não encontrado'
+
+    preço_estante_virtual = 'não encontrado'
 
 
 '''LIVRARIA CULTURA'''
@@ -139,6 +145,10 @@ except AttributeError:
 
     print('--NÃO ENCONTRADO--')
 
+    nome_livraria_cultura = 'não encontrado'
+
+    preço_livraria_cultura = 'não encontrado'
+
 '''LIVRARIA LEITURA'''
 
 pagina_livraria_leitura = get(url['livraria_leitura'])
@@ -174,6 +184,10 @@ except AttributeError:
     print('\n___LIVRARIA LEITURA___ \n')
 
     print('--NÃO ENCONTRADO--')
+
+    nome_livraria_leitura = 'não encontrado'
+
+    preço_livraria_leitura = 'não encontrado'
 
 '''lIVRARIA DA VILA'''
 
@@ -215,6 +229,10 @@ except AttributeError:
     print('--NÃO ENCONTRADO--')
 
     print('__________________________________________________________________________')
+
+    nome_livraria_da_vila = 'não encontrado'
+
+    preço_livraria_da_vila = 'não encontrado'
 
 '''PARTE CSV'''
 
