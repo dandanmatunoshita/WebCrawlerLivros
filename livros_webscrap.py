@@ -86,7 +86,7 @@ try:
         # print(f'\n___ESTANTE VIRTUAL___ \n')
 
         # print('--NÃO ENCONTRADO--')
-        
+            
         
         nome_estante_virtual = 'nao encontrado'
 
@@ -112,7 +112,7 @@ pagina_livraria_cultura = get(url['livraria_cultura'])
 sopa_livraria_cultura = BeautifulSoup(pagina_livraria_cultura.content, 'html.parser')
 
 #TESTAR ERRO
-
+i=1
 try:
 
     pesquisa_livraria_cultura = 'LIVRARIA CULTURA'
@@ -137,9 +137,44 @@ try:
 
     else: 
         
-        nome_livraria_cultura = 'nao encontrado'
+        # nome_livraria_cultura = 'nao encontrado'
 
-        preço_livraria_cultura = 'nao encontrado'
+        # preço_livraria_cultura = 'nao encontrado'
+        
+        while nome_do_livro.lower() not in trocar_caracter(nome_livraria_cultura.lower()):
+            i+=1
+            nomes_livraria_cultura = sopa_livraria_cultura.find_all('h2')
+
+            nome_livraria_cultura_2 = nomes_livraria_cultura[i+1]
+
+            nome_livraria_cultura = nome_livraria_cultura_2.get_text()
+
+            #verificação(text_nome_livraria_cultura_2)
+
+            preço_livraria_cultura = sopa_livraria_cultura.find_all('span', {'class' : 'prateleiraProduto__informacao__preco--valor'})
+
+            preço_livraria_cultura_2 = preço_livraria_cultura[i+1]
+
+            preço_livraria_cultura = preço_livraria_cultura_2.get_text()
+
+            link_livraria_cultura = sopa_livraria_cultura.find_all('h2', {'class': 'prateleiraProduto__informacao__nome'})
+
+            link_livraria_cultura = link_livraria_cultura[i]
+
+            carrinho_livraria_cultura = link_livraria_cultura.find('a')
+
+            if nome_do_livro.lower() in trocar_caracter(nome_livraria_cultura.lower()):
+                pass
+        
+        print('__________________________________________________________________________')
+
+        print(f'\n___LIVRARIA CULTURA___ \n')
+
+        print(f'--nome-- \n{nome_livraria_cultura.strip()} \n \n--preço-- \n{preço_livraria_cultura.strip()} \n')
+
+        print('url:', 'www.estantevirtual.com.br' + carrinho_livraria_cultura.get('href'))
+
+
         
 
         
