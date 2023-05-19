@@ -205,7 +205,7 @@ try:
 
         print(f'--nome-- \n{nome_livraria_cultura.strip()} \n \n--preço-- \n{preço_livraria_cultura.strip()} \n')
 
-        print('url:', 'www.estantevirtual.com.br' + carrinho_livraria_cultura.get('href'))
+        print('url:', carrinho_livraria_cultura.get('href'))
 
 
         
@@ -224,7 +224,7 @@ except AttributeError:
 
     print('__________________________________________________________________________')
 
-    print('\n___LIVRARIA CULTURA___ \n')
+    print('\n___LIVRARIA LEITURA___ \n')
 
     print('--NÃO ENCONTRADO--')
 
@@ -258,7 +258,7 @@ try:
 
         print(f'--nome-- \n{nome_livraria_leitura.strip()} \n \n--preço-- \n{preço_livraria_leitura.strip()} \n')
 
-        print('url:', 'www.estantevirtual.com.br' + carrinho_livraria_leitura.get('href'))
+        print('url:', carrinho_livraria_leitura.get('href'))
 
     else: 
         #print('__________________________________________________________________________')
@@ -267,9 +267,45 @@ try:
 
         #print('--NÃO ENCONTRADO--')
 
-        nome_livraria_leitura = 'nao encontrado'
+        # nome_livraria_leitura = 'nao encontrado'
 
-        preço_livraria_leitura = 'nao encontrado'
+        # preço_livraria_leitura = 'nao encontrado'
+
+        i=1
+        
+        while nome_do_livro.lower() not in trocar_caracter(nome_livraria_leitura.lower()):
+            i+=1
+            nomes_livraria_leitura = sopa_livraria_leitura.find_all('h4')
+
+            nome_livraria_leitura_2 = nomes_livraria_leitura[i+1]
+
+            nome_livraria_leitura = nome_livraria_leitura_2.get_text()
+
+            #verificação(text_nome_livraria_leitura_2)
+
+            preço_livraria_leitura = sopa_livraria_leitura.find_all('span', {'class' : 'price-new'})
+
+            preço_livraria_leitura_2 = preço_livraria_leitura[i+1]
+
+            preço_livraria_leitura = preço_livraria_leitura_2.get_text()
+
+            link_livraria_leitura = sopa_livraria_leitura.find_all('div', {'class': 'caption'})
+
+            link_livraria_leitura = link_livraria_leitura[i]
+
+            carrinho_livraria_leitura = link_livraria_leitura.find('a')
+
+            if nome_do_livro.lower() in trocar_caracter(nome_livraria_leitura.lower()):
+                pass
+        
+        print('__________________________________________________________________________')
+
+        print(f'\n___LIVRARIA leitura___ \n')
+
+        print(f'--nome-- \n{nome_livraria_leitura.strip()} \n \n--preço-- \n{preço_livraria_leitura.strip()} \n')
+
+        print('url:', carrinho_livraria_leitura.get('href'))
+
 
 except AttributeError:
 
@@ -310,7 +346,7 @@ try:
 
         print(f'--nome-- \n{nome_livraria_da_vila.strip()} \n \n--preço-- \n{preço_livraria_da_vila.strip()} \n')
 
-        print('url:', 'www.estantevirtual.com.br' + carrinho_livraria_da_vila.get('href'))
+        print('url:', carrinho_livraria_da_vila.get('href'))
 
     else: 
         # print('__________________________________________________________________________')
@@ -319,9 +355,44 @@ try:
 
         # print('--NÃO ENCONTRADO--')
 
-        nome_livraria_da_vila = 'nao encontrado'
+        # nome_livraria_da_vila = 'nao encontrado'
 
-        preço_livraria_da_vila = 'nao encontrado'
+        # preço_livraria_da_vila = 'nao encontrado'
+        #         
+        i=1
+        
+        while nome_do_livro.lower() not in trocar_caracter(nome_livraria_da_vila.lower()):
+            i+=1
+            nomes_livraria_da_vila = sopa_livraria_da_vila.find_all('div', {'class':'prod-nome'})
+
+            nome_livraria_da_vila_2 = nomes_livraria_da_vila[i+1]
+
+            nome_livraria_da_vila = nome_livraria_da_vila_2.get_text()
+
+            #verificação(text_nome_livraria_da_vila_2)
+
+            preço_livraria_da_vila = sopa_livraria_da_vila.find_all('div', {'class':'price'})
+
+            preço_livraria_da_vila_2 = preço_livraria_da_vila[i+1]
+
+            preço_livraria_da_vila = preço_livraria_da_vila_2.get_text()
+
+            link_livraria_da_vila = sopa_livraria_da_vila.find_all('div', {'class':'prod-nome'})
+
+            link_livraria_da_vila = link_livraria_da_vila[i]
+
+            carrinho_livraria_da_vila = link_livraria_da_vila.find('a')
+
+            if nome_do_livro.lower() in trocar_caracter(nome_livraria_da_vila.lower()):
+                pass
+        
+        print('__________________________________________________________________________')
+
+        print(f'\n___LIVRARIA da_vila___ \n')
+
+        print(f'--nome-- \n{nome_livraria_da_vila.strip()} \n \n--preço-- \n{preço_livraria_da_vila.strip()} \n')
+
+        print('url:', carrinho_livraria_da_vila.get('href'))
 
 except AttributeError:
 
