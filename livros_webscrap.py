@@ -81,16 +81,49 @@ try:
         print('url:', 'www.estantevirtual.com.br' + carrinho_estante_virtual.get('href'))
 
     else: 
+        i=1
         # print('__________________________________________________________________________')
 
         # print(f'\n___ESTANTE VIRTUAL___ \n')
 
         # print('--NÃO ENCONTRADO--')
-            
-        
-        nome_estante_virtual = 'nao encontrado'
 
-        preço_estante_virtual = 'nao encontrado'
+        while nome_do_livro.lower() not in trocar_caracter(nome_estante_virtual.lower()):
+            i+=1
+            nomes_estante_virtual = sopa_estante_virtual.find_all('h2')
+
+            nome_estante_virtual_2 = nomes_estante_virtual[i+1]
+
+            nome_estante_virtual = nome_estante_virtual_2.get_text()
+
+            #verificação(text_nome_estante_virtual_2)
+
+            preço_estante_virtual = sopa_estante_virtual.find_all('span', {'class' : 'preco'})
+
+            preço_estante_virtual_2 = preço_estante_virtual[i+1]
+
+            preço_estante_virtual = preço_estante_virtual_2.get_text()
+
+            link_estante_virtual = sopa_estante_virtual.find_all('div', {'class': 'ver-livros'})
+
+            link_estante_virtual = link_estante_virtual[i]
+
+            carrinho_estante_virtual = link_estante_virtual.find('a')
+
+            if nome_do_livro.lower() in trocar_caracter(nome_estante_virtual.lower()):
+                pass
+        
+        print('__________________________________________________________________________')
+
+        print(f'\n___ESTANTE VIRTUAL___ \n')
+
+        print(f'--nome-- \n{nome_estante_virtual.strip()} \n \n--preço-- \n{preço_estante_virtual.strip()} \n')
+
+        print('url:', 'www.estantevirtual.com.br' + carrinho_estante_virtual.get('href'))    
+        
+        # nome_estante_virtual = 'nao encontrado'
+
+        # preço_estante_virtual = 'nao encontrado'
 
 except AttributeError:
 
@@ -112,9 +145,9 @@ pagina_livraria_cultura = get(url['livraria_cultura'])
 sopa_livraria_cultura = BeautifulSoup(pagina_livraria_cultura.content, 'html.parser')
 
 #TESTAR ERRO
-i=1
-try:
 
+try:
+    
     pesquisa_livraria_cultura = 'LIVRARIA CULTURA'
 
     nome_livraria_cultura = sopa_livraria_cultura.find('h2', {'class' : 'prateleiraProduto__informacao__nome'}).get_text()
@@ -136,7 +169,7 @@ try:
         print('url:', 'www.estantevirtual.com.br' + carrinho_livraria_cultura.get('href'))
 
     else: 
-        
+        i=1
         # nome_livraria_cultura = 'nao encontrado'
 
         # preço_livraria_cultura = 'nao encontrado'
