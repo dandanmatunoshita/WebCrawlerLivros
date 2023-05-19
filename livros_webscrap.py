@@ -335,7 +335,11 @@ try:
 
     nome_livraria_da_vila = sopa_livraria_da_vila.find('div', {'class':'prod-nome'}).get_text()
 
-    preço_livraria_da_vila = sopa_livraria_da_vila.find('div', {'class':'price'}).get_text()
+    preço_livraria_da_vila = 'não encontrado'
+    elemento_preço = sopa_livraria_da_vila.find('div', {'class':'price'})
+    if elemento_preço is not None:
+        preço_livraria_da_vila = elemento_preço.get_text()
+
 
     link_livraria_da_vila = sopa_livraria_da_vila.find('div', {'class':'prod-nome'})
 
