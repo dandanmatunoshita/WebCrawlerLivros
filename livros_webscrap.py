@@ -4,7 +4,7 @@ from bs4 import BeautifulSoup
 
 def trocar_caracter(nome):
 
-    acentos = {'á': 'a', 'à': 'a', 'â': 'a', 'ã': 'a', 'ä': 'a', 'é': 'e', 'è': 'e', 'ê': 'e', 'ë': 'e', 'í': 'i', 'ì': 'i', 'î': 'i', 'ï': 'i', 'ó': 'o', 'ò': 'o', 'ô': 'o', 'õ': 'o', 'ö': 'o', 'ú': 'u', 'ù': 'u', 'û': 'u', 'ü': 'u', 'ç': 'c', ',': '', '"': '', "'": "",'Á': 'a', 'À': 'a', 'Â': 'a', 'Ã': 'a', 'É': 'e', 'È': 'e', 'Ê': 'e', 'Í': 'i', 'Ì': 'i', 'Î': 'i', 'Ò': 'o', 'Ó': 'o', 'Ô': 'o', 'Õ': 'o', 'Ù': 'u', 'Ú': 'u', 'Û': 'u', 'Ç': 'c',}
+    acentos = {'á': 'a', 'à': 'a', 'â': 'a', 'ã': 'a', 'ä': 'a', 'é': 'e', 'è': 'e', 'ê': 'e', 'ë': 'e', 'í': 'i', 'ì': 'i', 'î': 'i', 'ï': 'i', 'ó': 'o', 'ò': 'o', 'ô': 'o', 'õ': 'o', 'ö': 'o', 'ú': 'u', 'ù': 'u', 'û': 'u', 'ü': 'u', 'ç': 'c', ',': '', '"': '', "'": "",'Á': 'a', 'À': 'a', 'Â': 'a', 'Ã': 'a', 'É': 'e', 'È': 'e', 'Ê': 'e', 'Í': 'i', 'Ì': 'i', 'Î': 'i', 'Ò': 'o', 'Ó': 'o', 'Ô': 'o', 'Õ': 'o', 'Ù': 'u', 'Ú': 'u', 'Û': 'u', 'Ç': 'c'}
     texto_sem_acentos = ''
 
     for caracter in nome:
@@ -92,7 +92,7 @@ try:
             i+=1
             nomes_estante_virtual = sopa_estante_virtual.find_all('h2')
 
-            nome_estante_virtual_2 = nomes_estante_virtual[i+1]
+            nome_estante_virtual_2 = nomes_estante_virtual[i]
 
             nome_estante_virtual = nome_estante_virtual_2.get_text()
 
@@ -100,7 +100,7 @@ try:
 
             preço_estante_virtual = sopa_estante_virtual.find_all('span', {'class' : 'preco'})
 
-            preço_estante_virtual_2 = preço_estante_virtual[i+1]
+            preço_estante_virtual_2 = preço_estante_virtual[i]
 
             preço_estante_virtual = preço_estante_virtual_2.get_text()
 
@@ -125,7 +125,7 @@ try:
 
         # preço_estante_virtual = 'nao encontrado'
 
-except AttributeError:
+except AttributeError and IndexError:
 
     print('__________________________________________________________________________')
 
@@ -176,9 +176,9 @@ try:
         
         while nome_do_livro.lower() not in trocar_caracter(nome_livraria_cultura.lower()):
             i+=1
-            nomes_livraria_cultura = sopa_livraria_cultura.find_all('h2')
+            nomes_livraria_cultura = sopa_livraria_cultura.find_all('h2', {'class' : 'prateleiraProduto__informacao__nome'})
 
-            nome_livraria_cultura_2 = nomes_livraria_cultura[i+1]
+            nome_livraria_cultura_2 = nomes_livraria_cultura[i]
 
             nome_livraria_cultura = nome_livraria_cultura_2.get_text()
 
@@ -186,7 +186,7 @@ try:
 
             preço_livraria_cultura = sopa_livraria_cultura.find_all('span', {'class' : 'prateleiraProduto__informacao__preco--valor'})
 
-            preço_livraria_cultura_2 = preço_livraria_cultura[i+1]
+            preço_livraria_cultura_2 = preço_livraria_cultura[i]
 
             preço_livraria_cultura = preço_livraria_cultura_2.get_text()
 
@@ -220,11 +220,11 @@ try:
         '''
 
 
-except AttributeError:
+except AttributeError and IndexError:
 
     print('__________________________________________________________________________')
 
-    print('\n___LIVRARIA LEITURA___ \n')
+    print('\n___LIVRARIA CULTURA___ \n')
 
     print('--NÃO ENCONTRADO--')
 
@@ -237,6 +237,8 @@ except AttributeError:
 pagina_livraria_leitura = get(url['livraria_leitura'])
 
 sopa_livraria_leitura = BeautifulSoup(pagina_livraria_leitura.content, 'html.parser')
+
+
 
 try:
 
@@ -277,7 +279,7 @@ try:
             i+=1
             nomes_livraria_leitura = sopa_livraria_leitura.find_all('h4')
 
-            nome_livraria_leitura_2 = nomes_livraria_leitura[i+1]
+            nome_livraria_leitura_2 = nomes_livraria_leitura[i]
 
             nome_livraria_leitura = nome_livraria_leitura_2.get_text()
 
@@ -285,7 +287,7 @@ try:
 
             preço_livraria_leitura = sopa_livraria_leitura.find_all('span', {'class' : 'price-new'})
 
-            preço_livraria_leitura_2 = preço_livraria_leitura[i+1]
+            preço_livraria_leitura_2 = preço_livraria_leitura[i]
 
             preço_livraria_leitura = preço_livraria_leitura_2.get_text()
 
@@ -300,14 +302,14 @@ try:
         
         print('__________________________________________________________________________')
 
-        print(f'\n___LIVRARIA leitura___ \n')
+        print(f'\n___LIVRARIA LEITURA___ \n')
 
         print(f'--nome-- \n{nome_livraria_leitura.strip()} \n \n--preço-- \n{preço_livraria_leitura.strip()} \n')
 
         print('url:', carrinho_livraria_leitura.get('href'))
 
 
-except AttributeError:
+except AttributeError and IndexError:
 
     print('__________________________________________________________________________')
 
@@ -365,7 +367,7 @@ try:
             i+=1
             nomes_livraria_da_vila = sopa_livraria_da_vila.find_all('div', {'class':'prod-nome'})
 
-            nome_livraria_da_vila_2 = nomes_livraria_da_vila[i+1]
+            nome_livraria_da_vila_2 = nomes_livraria_da_vila[i]
 
             nome_livraria_da_vila = nome_livraria_da_vila_2.get_text()
 
@@ -373,7 +375,7 @@ try:
 
             preço_livraria_da_vila = sopa_livraria_da_vila.find_all('div', {'class':'price'})
 
-            preço_livraria_da_vila_2 = preço_livraria_da_vila[i+1]
+            preço_livraria_da_vila_2 = preço_livraria_da_vila[i]
 
             preço_livraria_da_vila = preço_livraria_da_vila_2.get_text()
 
@@ -386,15 +388,16 @@ try:
             if nome_do_livro.lower() in trocar_caracter(nome_livraria_da_vila.lower()):
                 pass
         
+
         print('__________________________________________________________________________')
 
-        print(f'\n___LIVRARIA da_vila___ \n')
+        print(f'\n___LIVRARIA DA VILA___ \n')
 
         print(f'--nome-- \n{nome_livraria_da_vila.strip()} \n \n--preço-- \n{preço_livraria_da_vila.strip()} \n')
 
         print('url:', carrinho_livraria_da_vila.get('href'))
 
-except AttributeError:
+except AttributeError and IndexError:
 
     print('__________________________________________________________________________')
 
@@ -427,3 +430,4 @@ nome_livraria_da_vila = trocar_caracter(nome_livraria_da_vila).strip().lower()
 with open('banco_csv.csv', 'a', newline='') as arquivo:
     escrever = csv.writer(arquivo)
     escrever.writerow([nome_estante_virtual, preço_estante_virtual, nome_livraria_cultura, preço_livraria_cultura, nome_livraria_leitura, preço_livraria_leitura, nome_livraria_da_vila, preço_livraria_da_vila])
+
