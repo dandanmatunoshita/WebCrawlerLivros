@@ -245,8 +245,11 @@ try:
     pesquisa_livraria_leitura = 'LIVRARIA LEITURA'
 
     nome_livraria_leitura = sopa_livraria_leitura.find('h4').get_text()
-
-    preço_livraria_leitura = sopa_livraria_leitura.find('span', {'class' : 'price-new'}).get_text()
+    
+    preço_livraria_leitura = 'não encontrado'
+    elemento_preço = sopa_livraria_leitura.find('span', {'class' : 'price-new'})
+    if elemento_preço is not None:
+        preço_livraria_leitura = elemento_preço.get_text()
 
     link_livraria_leitura = sopa_livraria_leitura.find('div', {'class' : 'caption'})
 
@@ -263,16 +266,6 @@ try:
         print('url:', carrinho_livraria_leitura.get('href'))
 
     else: 
-        #print('__________________________________________________________________________')
-
-        #print(f'\n___LIVRARIA LEITURA___ \n')
-
-        #print('--NÃO ENCONTRADO--')
-
-        # nome_livraria_leitura = 'nao encontrado'
-
-        # preço_livraria_leitura = 'nao encontrado'
-
         i=1
         
         while nome_do_livro.lower() not in trocar_caracter(nome_livraria_leitura.lower()):
@@ -355,16 +348,6 @@ try:
         print('url:', carrinho_livraria_da_vila.get('href'))
 
     else: 
-        # print('__________________________________________________________________________')
-
-        # print(f'\n___LIVRARIA LEITURA___ \n')
-
-        # print('--NÃO ENCONTRADO--')
-
-        # nome_livraria_da_vila = 'nao encontrado'
-
-        # preço_livraria_da_vila = 'nao encontrado'
-        #         
         i=1
         
         while nome_do_livro.lower() not in trocar_caracter(nome_livraria_da_vila.lower()):
@@ -434,4 +417,3 @@ nome_livraria_da_vila = trocar_caracter(nome_livraria_da_vila).strip().lower()
 with open('banco_csv.csv', 'a', newline='') as arquivo:
     escrever = csv.writer(arquivo)
     escrever.writerow([nome_estante_virtual, preço_estante_virtual, nome_livraria_cultura, preço_livraria_cultura, nome_livraria_leitura, preço_livraria_leitura, nome_livraria_da_vila, preço_livraria_da_vila])
-
